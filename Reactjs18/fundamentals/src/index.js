@@ -3,16 +3,19 @@ import './index.css';
 
 const data = [
   {
+    id: 1,
     title: 'beautiful life',
     author: 'kedour el merhi Ba3ata',
     img: './images/book-1.jpg',
   },
   {
+    id: 2,
     title: 'Ouzera',
     author: 'bou3lem hmida',
     img: './images/book-2.jpg',
   },
   {
+    id: 3,
     title: 'kedour el haycha',
     author: 'denideni',
     img: './images/book-3.jpg',
@@ -24,10 +27,11 @@ const BookList = () => {
     <section className="booklist">
       <h1>Best amazon books sellers</h1>
       {data.map((item) => {
+        const { id, title, author, img } = item;
         return (
-          <ul key={item}>
+          <ul key={id}>
             <li>
-              <Book title={item.title} author={item.author} img={item.img}>
+              <Book title={title} author={author} img={img}>
                 <button>click me</button>
               </Book>
             </li>

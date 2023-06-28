@@ -867,3 +867,92 @@ function BookList() {
   return <section className="booklist">{newNames}</section>;
 }
 ```
+
+#### Proper List
+
+- remove names and newNames
+
+```js
+function BookList() {
+  return (
+    <section className="booklist">
+      {books.map((book) => {
+        console.log(book);
+
+        // return 'hello';
+        return (
+          <div>
+            <h2>{book.title}</h2>
+          </div>
+        );
+      })}
+    </section>
+  );
+}
+```
+
+- render component
+- pass properties one by one
+
+```js
+function BookList() {
+  return (
+    <section className="booklist">
+      {books.map((book) => {
+        console.log(book);
+        const { img, title, author } = book;
+        return <Book img={img} title={title} author={author} />;
+      })}
+    </section>
+  );
+}
+```
+
+#### Key Prop
+
+- typically it's going to be id
+
+```js
+const books = [
+  {
+    author: 'Jordan Moore',
+    title: 'Interesting Facts For Curious Minds',
+    img: './images/book-1.jpg',
+    id: 1,
+  },
+  {
+    author: 'James Clear',
+    title: 'Atomic Habits',
+    img: 'https://images-na.ssl-images-amazon.com/images/I/81wgcld4wxL._AC_UL900_SR900,600_.jpg',
+    id: 2,
+  },
+];
+
+function BookList() {
+  return (
+    <section className="booklist">
+      {books.map((book) => {
+        console.log(book);
+        const { img, title, author, id } = book;
+        return <Book book={book} key={id} />;
+      })}
+    </section>
+  );
+}
+```
+
+- you will see index,but it's not advised if the list is changing
+
+```js
+function BookList() {
+  return (
+    <section className="booklist">
+      {books.map((book, index) => {
+        console.log(book);
+        const { img, title, author, id } = book;
+        return <Book book={book} key={index} />;
+      })}
+    </section>
+  );
+}
+```
