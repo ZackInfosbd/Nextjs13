@@ -6,9 +6,11 @@ function Greeting() {
   //   return <h1>this is my first component</h1>;
 
   return (
-    <h1>
-      <Testing />
-    </h1>
+    <>
+      <h3>
+        <Testing />
+      </h3>
+    </>
   );
 }
 
