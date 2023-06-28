@@ -5,26 +5,25 @@ const BookList = () => {
   return (
     <section className="booklist">
       <h1>Best amazon books sellers</h1>
+
+      <Book />
+      <Book />
       <Book />
     </section>
   );
 };
 
+const author = 'this is an author';
 const Book = () => {
+  const title = 'this is a title';
   return (
     <article className="book">
-      <Image />
-      <Title />
-      <Author />
+      <img alt="book" src="./images/book-1.jpg" />
+      <h4>{title} </h4>
+      <p>{author} </p>
     </article>
   );
 };
-
-const Image = () => <img alt="book-image" src="./images/book-1.jpg" />;
-
-const Title = () => <h4>this is a title</h4>;
-
-const Author = () => <p>this is an author</p>;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

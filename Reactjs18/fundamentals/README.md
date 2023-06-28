@@ -251,3 +251,294 @@ const Message = () => {
 - top right corner
 - more tools/extensions
 - open chrome web store
+
+#### Book List
+
+- setup structure
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+function BookList() {
+  return (
+    <section>
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+    </section>
+  );
+}
+
+const Book = () => {
+  return (
+    <article>
+      <Image />
+      <Title />
+      <Author />
+    </article>
+  );
+};
+
+const Image = () => <h2>image placeholder</h2>;
+const Title = () => {
+  return <h2>Book Title</h2>;
+};
+const Author = () => <h4>Author</h4>;
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<BookList />);
+```
+
+- in search engine type - 'amazon best selling books'
+  [Amazon Best Sellers](https://www.amazon.com/Best-Sellers-Books/zgbs/books/)
+- DON'T NEED TO BUY ANYTHING !!!
+- NOT AN AFFILIATE LINK !!!!
+- choose a book
+- copy image, title and author
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+function BookList() {
+  return (
+    <section>
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+    </section>
+  );
+}
+
+const Book = () => {
+  return (
+    <article className="book">
+      <Image />
+      <Title />
+      <Author />
+    </article>
+  );
+};
+
+const Image = () => (
+  <img
+    src="https://images-na.ssl-images-amazon.com/images/I/71m+Qtq+HrL._AC_UL900_SR900,600_.jpg"
+    alt="Interesting Facts For Curious Minds"
+  />
+);
+const Title = () => {
+  return <h2>Interesting Facts For Curious Minds</h2>;
+};
+const Author = () => <h4>Jordan Moore </h4>;
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<BookList />);
+```
+
+#### CSS
+
+- create index.css in src
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: #f1f5f8;
+  color: #222;
+}
+```
+
+- import file and add classes
+
+```js
+import './index.css';
+
+function BookList() {
+  return (
+    <section className="booklist">
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+    </section>
+  );
+}
+
+const Book = () => {
+  return (
+    <article className="book">
+      <Image />
+      <Title />
+      <Author />
+    </article>
+  );
+};
+```
+
+- complete css
+
+```css
+.booklist {
+  width: 90vw;
+  max-width: 1170px;
+  margin: 5rem auto;
+  display: grid;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .booklist {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.book {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+.book img {
+  width: 100%;
+  object-fit: cover;
+}
+.book h2 {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+```
+
+#### Local Images (Public Folder)
+
+- Optional Video !!!
+
+- external images (hosted on different server) - just need an url
+- local images (public folder) - less performant
+- local images (src folder) - better solution for assets,
+  since under the hood they get optimized.
+
+- save image (Save Image As....)
+- create images folder in public
+- copy/paste image
+- rename (optional)
+- replace url in the src - './images/imageName.extension'
+- './' because assets are on the same server
+
+```js
+const Image = () => (
+  <img src="./images/book-1.jpg" alt="Interesting Facts For Curious Minds" />
+);
+```
+
+- whatever assets we place in public - instantly available
+- domain(localhost)/asset
+
+#### JSX - CSS (inline styles)
+
+- style prop
+- {} in JSX means going back to JS Land
+- value is an object with key/value pairs - capitalized and with ''
+
+```js
+const Author = () => (
+  <h4 style={{ color: '#617d98', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+    Jordan Moore
+  </h4>
+);
+```
+
+- css rules still apply (inline vs external css)
+
+```css
+.book h4 {
+  /* won't work */
+  color: red;
+  /* will work */
+  letter-spacing: 2px;
+}
+```
+
+- external libraries use inline css,
+  so if you want to make some changes,
+  reference the library docs and elements tab
+
+- alternative option
+
+```js
+const Author = () => {
+  const inlineHeadingStyles = {
+    color: '#617d98',
+    fontSize: '0.75rem',
+    marginTop: '0.5rem',
+  };
+  return <h4 style={inlineHeadingStyles}>Jordan Moore </h4>;
+};
+```
+
+- FOR THE MOST PART, MULTIPLE APPROACHES AVAILABLE !!!
+- AS LONG AS THE RESULT IS THE SAME, REALLY COMES DOWN TO PREFERENCE !!!!
+
+#### JSX - Javascript
+
+- refactor to single book component (personal preference)
+- remove inline css
+
+```js
+const Book = () => {
+  return (
+    <article className="book">
+      <img
+        src="./images/book-1.jpg"
+        alt="Interesting Facts For Curious Minds"
+      />
+      <h2>Interesting Facts For Curious Minds</h2>
+      <h4>Jordan Moore </h4>
+    </article>
+  );
+};
+```
+
+```css
+.book h4 {
+  color: #617d98;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  letter-spacing: 2px;
+}
+```
+
+- {} in JSX means going back to JS Land
+- value inside must be an expression (return value),
+  can't be a statement
+
+```js
+const author = 'Jordan Moore';
+const Book = () => {
+  const title = 'Interesting Facts For Curious Mindssssss';
+  return (
+    <article className="book">
+      <img
+        src="./images/book-1.jpg"
+        alt="Interesting Facts For Curious Minds"
+      />
+      <h2>{title}</h2>
+
+      <h4>{author.toUpperCase()} </h4>
+      {/* <p>{let x = 6}</p> */}
+      <p>{6 + 6}</p>
+    </article>
+  );
+};
+```
+
+- toggle line comment Edit/Toggle Line Comment
