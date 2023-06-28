@@ -1,18 +1,21 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Testing from './testing';
 
 function Greeting() {
-  //   return <h1>this is my first component</h1>;
-
   return (
     <>
       <h3>
-        <Testing />
+        <Person />
+        <Message />
       </h3>
     </>
   );
 }
+
+const Person = () => <h1>John Doe</h1>;
+
+const Message = () => {
+  return <h2>Hello there </h2>;
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
