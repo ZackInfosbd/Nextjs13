@@ -245,3 +245,9 @@ const Message = () => {
   return <p>this is my message</p>;
 };
 ```
+
+#### React Developer Tools
+
+- top right corner
+- more tools/extensions
+- open chrome web store
