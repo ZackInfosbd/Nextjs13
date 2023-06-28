@@ -38,3 +38,21 @@
 
 - toggle sidebar CMD + B
 - shortcuts settings/keyboard shortcuts
+
+#### First Component
+
+```js
+function Greeting() {
+  return <h2>My First Component</h2>;
+}
+
+// arrow function also works
+
+const Greeting = () => {
+  return <h2>My First Component</h2>;
+};
+```
+
+- starts with capital letter
+- must return JSX (html)
+- always close tag <Greeting/>
