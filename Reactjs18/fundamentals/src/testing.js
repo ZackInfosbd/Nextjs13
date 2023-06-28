@@ -1,4 +1,2 @@
-const Testing = () => {
-  return <div>Testing</div>;
-};
+const Testing = () => <h1>Test</h1>;
 export default Testing;

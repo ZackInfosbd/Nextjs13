@@ -124,3 +124,37 @@ settings.json
   - react auto import
     - uncheck
     - React Snippets › Settings: Import React On Top
+
+#### First Component in Detail
+
+- capital letter
+- must return something
+- JSX syntax (return html)
+  - to make our lives easier
+  - calling function under the hood
+
+index.js
+
+```js
+const Greeting = () => {
+  return React.createElement('h2', {}, 'hello world');
+};
+```
+
+```js
+function Greeting() {
+  return (
+    <div>
+      <h2>hello world</h2>
+    </div>
+  );
+}
+
+const Greeting = () => {
+  return React.createElement(
+    'div',
+    {},
+    React.createElement('h2', {}, 'hello world')
+  );
+};
+```
