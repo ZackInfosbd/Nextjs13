@@ -23,6 +23,11 @@ const data = [
 ];
 
 const BookList = () => {
+  const someValue = 'some value';
+
+  const showBookTitle = () => {
+    console.log(someValue);
+  };
   return (
     <section className="booklist">
       <h1>Best amazon books sellers</h1>
@@ -33,9 +38,7 @@ const BookList = () => {
             <li>
               {/* <Book title={title} author={author} img={img}> */}
               {/* <Book book={item}> */}
-              <Book {...item}>
-                <button>click me</button>
-              </Book>
+              <Book {...item} handleDisplayTitle={showBookTitle}></Book>
             </li>
           </ul>
         );
@@ -46,13 +49,13 @@ const BookList = () => {
 
 const Book = (props) => {
   // const { title, author, img, children } = props.book;
-  const { title, author, img, children } = props;
+  const { title, author, img, children, handleDisplayTitle } = props;
   return (
     <article className="book">
       <img alt="book" src={img} />
       <h4>{title} </h4>
       <p>{author} </p>
-      <button type="button" onClick={() => console.log(`${title}`)}>
+      <button type="button" onClick={handleDisplayTitle}>
         display title
       </button>
       {children}

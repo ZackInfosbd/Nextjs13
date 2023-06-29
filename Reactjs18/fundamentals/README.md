@@ -1241,3 +1241,123 @@ const Book = (props) => {
 ```
 
 - remove button
+
+#### Prop Drilling
+
+- react data flow - can only pass props down
+- alternatives Context API, redux, other state libraries
+
+```js
+function BookList() {
+  const someValue = 'shakeAndBake';
+  const displayValue = () => {
+    console.log(someValue);
+  };
+  return (
+    <section className="booklist">
+      {books.map((book) => {
+        return <Book {...book} key={book.id} displayValue={displayValue} />;
+      })}
+    </section>
+  );
+}
+
+const Book = (props) => {
+  const { img, title, author, displayValue } = props;
+
+  return (
+    <article className="book">
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+      <button onClick={displayValue}>click me</button>
+      <h4>{author} </h4>
+    </article>
+  );
+};
+```
+
+#### More Complex Example
+
+- initial setup
+- create getBook function in booklist
+- accepts id as an argument and finds the book
+- [Javascript Nuggets - Filter and Find](https://www.youtube.com/watch?v=KeYxsev737s&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=4)
+- pass the function down to Book Component and invoke on the button click
+- in the Book Component destructure id and function
+- invoke the function when user clicks the button, pass the id
+- the goal : you should see the same book in the console
+
+```js
+const BookList = () => {
+  const getBook = (id) => {
+    const book = books.find((book) => book.id === id);
+    console.log(book);
+  };
+
+  return (
+    <section className="booklist">
+      {books.map((book) => {
+        return <Book {...book} key={book.id} getBook={getBook} />;
+      })}
+    </section>
+  );
+};
+
+const Book = (props) => {
+  const { img, title, author, getBook, id } = props;
+  // console.log(props);
+
+  return (
+    <article className="book">
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+      {/* this is not going to work */}
+      <button onClick={getBook(id)}>display title</button>
+      <h4>{author}</h4>
+    </article>
+  );
+};
+```
+
+- two fixes
+- first option - setup wrapper
+
+```js
+const Book = (props) => {
+  const { img, title, author, getBook, id } = props;
+  // console.log(props);
+  const getSingleBook = () => {
+    getBook(id);
+  };
+  return (
+    <article className="book">
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+      <button onClick={getSingleBook}>display title</button>
+      <h4>{author}</h4>
+    </article>
+  );
+};
+```
+
+- two fixes
+- second option - wrap in the anonymous arrow function
+
+```js
+const Book = (props) => {
+  const { img, title, author, getBook, id } = props;
+  // console.log(props);
+  const getSingleBook = () => {
+    getBook(id);
+  };
+  return (
+    <article className="book">
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+
+      <button onClick={() => getBook(id)}>display title</button>
+      <h4>{author}</h4>
+    </article>
+  );
+};
+```
