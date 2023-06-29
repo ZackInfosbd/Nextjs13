@@ -27,11 +27,13 @@ const BookList = () => {
     <section className="booklist">
       <h1>Best amazon books sellers</h1>
       {data.map((item) => {
-        const { id, title, author, img } = item;
+        // const { id, title, author, img } = item;
         return (
-          <ul key={id}>
+          <ul key={item.id}>
             <li>
-              <Book title={title} author={author} img={img}>
+              {/* <Book title={title} author={author} img={img}> */}
+              {/* <Book book={item}> */}
+              <Book {...item}>
                 <button>click me</button>
               </Book>
             </li>
@@ -43,12 +45,14 @@ const BookList = () => {
 };
 
 const Book = (props) => {
+  // const { title, author, img, children } = props.book;
+  const { title, author, img, children } = props;
   return (
     <article className="book">
-      <img alt="book" src={props.img} />
-      <h4>{props.title} </h4>
-      <p>{props.author} </p>
-      {props.children}
+      <img alt="book" src={img} />
+      <h4>{title} </h4>
+      <p>{author} </p>
+      {children}
     </article>
   );
 };
