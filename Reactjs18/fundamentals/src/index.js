@@ -50,18 +50,28 @@ const EventExample = () => {
     alert('on click Event');
   };
 
-  const onChangeEvent = () => {
+  const handleChangeEvent = (e) => {
+    console.log(e);
+    console.log(e.target);
+    console.log(e.target.name);
+    console.log(e.target.value);
     console.log('the user has entred a value');
   };
+
+  const handleFormSubmission = (e) => {
+    e.preventDefault();
+    console.log('form submitted');
+  };
+
   return (
     <section>
       <h3>Event Example</h3>
-      <form>
+      <form onSubmit={handleFormSubmission}>
         <input
           type="text"
-          name="example"
+          name="product"
           style={{ margin: '1rem 0' }}
-          onChange={onChangeEvent}
+          onChange={handleChangeEvent}
         />
       </form>
       <button onClick={onClickEvent}>click me</button>
