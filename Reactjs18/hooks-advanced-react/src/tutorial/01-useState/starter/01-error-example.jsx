@@ -1,13 +1,6 @@
 import { useState } from 'react';
 
 const ErrorExample = () => {
-  // const stateFirstItem = useState('hello')[0];
-  // const stateSecondItem = useState('hello')[1];
-
-  // console.log(useState());
-  // console.log(stateFirstItem);
-  // console.log(stateSecondItem);
-
   const [count, setCount] = useState(0);
 
   const handleCountClick = () => {
