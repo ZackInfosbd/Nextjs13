@@ -23,10 +23,9 @@ const data = [
 ];
 
 const BookList = () => {
-  const someValue = 'some value';
-
-  const showBookTitle = () => {
-    console.log(someValue);
+  const getBook = (id) => {
+    const book = data.find((item) => item.id === id);
+    console.log(book);
   };
   return (
     <section className="booklist">
@@ -38,7 +37,7 @@ const BookList = () => {
             <li>
               {/* <Book title={title} author={author} img={img}> */}
               {/* <Book book={item}> */}
-              <Book {...item} handleDisplayTitle={showBookTitle}></Book>
+              <Book {...item} getBook={getBook}></Book>
             </li>
           </ul>
         );
@@ -49,14 +48,20 @@ const BookList = () => {
 
 const Book = (props) => {
   // const { title, author, img, children } = props.book;
-  const { title, author, img, children, handleDisplayTitle } = props;
+  const { id, title, author, img, children, getBook } = props;
+
+  const getSingleBook = () => {
+    getBook(id);
+  };
+
   return (
     <article className="book">
       <img alt="book" src={img} />
       <h4>{title} </h4>
       <p>{author} </p>
-      <button type="button" onClick={handleDisplayTitle}>
-        display title
+      <button type="button" onClick={() => getBook(id)}>
+        {/* <button type="button" onClick={getSingleBook}> */}
+        get book
       </button>
       {children}
     </article>
