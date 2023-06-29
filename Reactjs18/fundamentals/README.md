@@ -1169,3 +1169,40 @@ const EventExamples = () => {
   submit form
 </button>
 ```
+
+#### Mind Grenade - passing anoymous callbacks instead of reference
+
+- alternative approach
+- pass anonymous function (in this case arrow function)
+- one liner - less code
+
+```js
+const EventExamples = () => {
+  return (
+    <section>
+      <button onClick={() => console.log('hello there')}>click me</button>
+    </section>
+  );
+};
+```
+
+- also can access event object
+
+```js
+const EventExamples = () => {
+  return (
+    <section>
+      <form>
+        <h2>Typical Form</h2>
+        <input
+          type="text"
+          name="example"
+          onChange={(e) => console.log(e.target.value)}
+          style={{ margin: '1rem 0' }}
+        />
+      </form>
+      <button onClick={() => console.log('you clicked me')}>click me</button>
+    </section>
+  );
+};
+```

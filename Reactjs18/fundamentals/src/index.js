@@ -78,7 +78,9 @@ const EventExample = () => {
       <button type="submit" onClick={handleFormSubmission}>
         button form submit
       </button>
-      <button onClick={onClickEvent}>click me</button>
+      <button type="button" onClick={() => console.log('clicked!!')}>
+        click me
+      </button>
     </section>
   );
 };
