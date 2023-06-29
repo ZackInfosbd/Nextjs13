@@ -1602,3 +1602,16 @@ public/index.html
 ```html
 <title>Best Sellers</title>
 ```
+
+#### Build Production Application
+
+- stop the dev server "ctrl + c"
+- run "npm run build"
+- build folder gets created
+
+#### Netlify
+
+- sign up
+- add new site/deploy manually
+- choose build folder
+- rename site - site settings/change site name
