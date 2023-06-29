@@ -26,6 +26,7 @@ const BookList = () => {
   return (
     <section className="booklist">
       <h1>Best amazon books sellers</h1>
+      <EventExample />
       {data.map((item) => {
         // const { id, title, author, img } = item;
         return (
@@ -40,6 +41,30 @@ const BookList = () => {
           </ul>
         );
       })}
+    </section>
+  );
+};
+
+const EventExample = () => {
+  const onClickEvent = () => {
+    alert('on click Event');
+  };
+
+  const onChangeEvent = () => {
+    console.log('the user has entred a value');
+  };
+  return (
+    <section>
+      <h3>Event Example</h3>
+      <form>
+        <input
+          type="text"
+          name="example"
+          style={{ margin: '1rem 0' }}
+          onChange={onChangeEvent}
+        />
+      </form>
+      <button onClick={onClickEvent}>click me</button>
     </section>
   );
 };
