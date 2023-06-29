@@ -123,3 +123,11 @@ There are a few ways that you can trigger a re-render in a React component:
 - By changing the component's state or props. When the component's state or props change, React will re-render the component to reflect these changes.
 
 - When the parent element re-renders, even if the component's state or props have not changed.
+
+#### General Rules of Hooks
+
+- starts with "use" (both -react and custom hooks)
+- component must be uppercase
+- invoke inside function/component body
+- don't call hooks conditionally (cover later)
+- set functions don't update state immediately (cover later)
