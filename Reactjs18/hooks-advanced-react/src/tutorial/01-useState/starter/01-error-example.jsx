@@ -1,9 +1,17 @@
+import { useState } from 'react';
+
 const ErrorExample = () => {
-  let count = 0;
+  // const stateFirstItem = useState('hello')[0];
+  // const stateSecondItem = useState('hello')[1];
+
+  // console.log(useState());
+  // console.log(stateFirstItem);
+  // console.log(stateSecondItem);
+
+  const [count, setCount] = useState(0);
 
   const handleCountClick = () => {
-    count = count + 1;
-    console.log(count);
+    setCount(count + 1);
   };
 
   return (
