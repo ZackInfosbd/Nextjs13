@@ -1,6 +1,6 @@
 const Book = (props) => {
   // const { title, author, img, children } = props.book;
-  const { id, title, author, img, children, getBook } = props;
+  const { id, title, author, img, children, getBook, number } = props;
 
   //   const getSingleBook = () => {
   //     getBook(id);
@@ -16,6 +16,7 @@ const Book = (props) => {
         get book
       </button>
       {children}
+      <span className="number">{`# ${number + 1}`} </span>
     </article>
   );
 };

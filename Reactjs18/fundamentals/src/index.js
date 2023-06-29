@@ -11,14 +11,14 @@ const BookList = () => {
   return (
     <section className="booklist">
       <h1>Best amazon books sellers</h1>
-      {data.map((item) => {
+      {data.map((item, index) => {
         // const { id, title, author, img } = item;
         return (
           <ul key={item.id}>
             <li>
               {/* <Book title={title} author={author} img={img}> */}
               {/* <Book book={item}> */}
-              <Book {...item} getBook={getBook}></Book>
+              <Book {...item} getBook={getBook} number={index}></Book>
             </li>
           </ul>
         );
