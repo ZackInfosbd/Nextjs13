@@ -26,7 +26,6 @@ const BookList = () => {
   return (
     <section className="booklist">
       <h1>Best amazon books sellers</h1>
-      <EventExample />
       {data.map((item) => {
         // const { id, title, author, img } = item;
         return (
@@ -45,46 +44,6 @@ const BookList = () => {
   );
 };
 
-const EventExample = () => {
-  const onClickEvent = () => {
-    alert('on click Event');
-  };
-
-  const handleChangeEvent = (e) => {
-    console.log(e);
-    console.log(e.target);
-    console.log(e.target.name);
-    console.log(e.target.value);
-    console.log('the user has entred a value');
-  };
-
-  const handleFormSubmission = (e) => {
-    e.preventDefault();
-    console.log('form submitted');
-  };
-
-  return (
-    <section>
-      <h3>Event Example</h3>
-      <form onSubmit={handleFormSubmission}>
-        <input
-          type="text"
-          name="product"
-          style={{ margin: '1rem 0' }}
-          onChange={handleChangeEvent}
-        />
-        <button type="submit">form submit</button>
-      </form>
-      <button type="submit" onClick={handleFormSubmission}>
-        button form submit
-      </button>
-      <button type="button" onClick={() => console.log('clicked!!')}>
-        click me
-      </button>
-    </section>
-  );
-};
-
 const Book = (props) => {
   // const { title, author, img, children } = props.book;
   const { title, author, img, children } = props;
@@ -93,6 +52,9 @@ const Book = (props) => {
       <img alt="book" src={img} />
       <h4>{title} </h4>
       <p>{author} </p>
+      <button type="button" onClick={() => console.log(`${title}`)}>
+        display title
+      </button>
       {children}
     </article>
   );
