@@ -1,15 +1,20 @@
-import image1 from './images/book-1.jpg';
-import image2 from './images/book-2.jpg';
-import image3 from './images/book-3.jpg';
-
-const data = [
-  { id: 1, image: image1, title: 'the first book', author: 'the first author' },
+export const data = [
+  {
+    id: 1,
+    title: 'beautiful life',
+    author: 'kedour el merhi Ba3ata',
+    img: './images/book-1.jpg',
+  },
   {
     id: 2,
-    image: image2,
-    title: 'the second book',
-    author: 'the second author',
+    title: 'Ouzera',
+    author: 'bou3lem hmida',
+    img: './images/book-2.jpg',
   },
-  { id: 3, image: image3, title: 'the third book', author: 'the third author' },
+  {
+    id: 3,
+    title: 'kedour el haycha',
+    author: 'denideni',
+    img: './images/book-3.jpg',
+  },
 ];
-export default data;

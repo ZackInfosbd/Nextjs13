@@ -1,26 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
-
-const data = [
-  {
-    id: 1,
-    title: 'beautiful life',
-    author: 'kedour el merhi Ba3ata',
-    img: './images/book-1.jpg',
-  },
-  {
-    id: 2,
-    title: 'Ouzera',
-    author: 'bou3lem hmida',
-    img: './images/book-2.jpg',
-  },
-  {
-    id: 3,
-    title: 'kedour el haycha',
-    author: 'denideni',
-    img: './images/book-3.jpg',
-  },
-];
+import { data } from './data';
+import Book from './Book';
 
 const BookList = () => {
   const getBook = (id) => {
@@ -43,28 +24,6 @@ const BookList = () => {
         );
       })}
     </section>
-  );
-};
-
-const Book = (props) => {
-  // const { title, author, img, children } = props.book;
-  const { id, title, author, img, children, getBook } = props;
-
-  const getSingleBook = () => {
-    getBook(id);
-  };
-
-  return (
-    <article className="book">
-      <img alt="book" src={img} />
-      <h4>{title} </h4>
-      <p>{author} </p>
-      <button type="button" onClick={() => getBook(id)}>
-        {/* <button type="button" onClick={getSingleBook}> */}
-        get book
-      </button>
-      {children}
-    </article>
   );
 };
 
