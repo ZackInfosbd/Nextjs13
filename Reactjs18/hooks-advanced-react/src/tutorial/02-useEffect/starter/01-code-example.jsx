@@ -6,6 +6,7 @@ const CodeExample = () => {
   const sayHello = () => {
     console.log('hello  there');
 
+    // this produce infinite loop with re-renders
     setValue(value + 1);
   };
 
