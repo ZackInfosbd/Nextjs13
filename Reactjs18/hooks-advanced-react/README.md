@@ -892,3 +892,73 @@ return (
   </div>
 );
 ```
+
+#### Order Matters - Solution
+
+- before returns
+
+```js
+const [user, setUser] = useState(null);
+console.log(user); // still null
+// we can't pull out properties from null
+const { avatar_url, name, company, bio } = user;
+```
+
+- after returns
+
+```js
+console.log(user); // user object;
+const { avatar_url, name, company, bio } = user;
+```
+
+```js
+return (
+  <div>
+    <img
+      style={{ width: '100px', borderRadius: '25px' }}
+      src={avatar_url}
+      alt={name}
+    />
+    <h2>{name}</h2>
+    <h4>works at {company}</h4>
+    <p>{bio}</p>
+  </div>
+);
+```
+
+Vanilla JS
+
+```js
+const someObject = {
+  name: 'jo koy',
+};
+// this is cool
+someObject.name; // returns 'jo koy'
+someObject.propertyThatDoesNotExist; // returns undefined
+
+// not cool at all, javascript will scream, yell and complain
+const randomValue = null;
+randomValue.name;
+
+// this is ok
+const randomList = [];
+console.log(randomList[0]); // returns undefined
+
+// not cool at all, javascript will scream, yell and complain
+console.log(randomList[0].name);
+```
+
+#### Fetch Function Location
+
+```js
+const fetchData = async () => {
+  // fetch data
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+```
+
+- DON'T ADD fetchData to dependency array !!!
+- IT WILL TRIGGER INFINITE LOOP !!!
