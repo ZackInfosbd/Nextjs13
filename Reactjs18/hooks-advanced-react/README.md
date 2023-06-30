@@ -131,3 +131,87 @@ There are a few ways that you can trigger a re-render in a React component:
 - invoke inside function/component body
 - don't call hooks conditionally (cover later)
 - set functions don't update state immediately (cover later)
+
+#### useState with Array
+
+```js
+import Starter from './tutorial/01-useState/starter/03-useState-array.jsx';
+```
+
+Setup Challenge :
+
+- import data
+- setup a state value
+  - people - default value equal to data
+- display list(people) in the browser
+
+- create two functions
+
+  - one that removes single item from the list
+  - one that clears entire list
+
+1. render the list
+
+```js
+import React from 'react';
+import { data } from '../../../data';
+const UseStateArray = () => {
+  const [people, setPeople] = React.useState(data);
+
+  return (
+    <div>
+      {people.map((person) => {
+        const { id, name } = person;
+        return (
+          <div key={id} className="item">
+            <h4>{name}</h4>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default UseStateArray;
+```
+
+2. remove items
+
+[Javascript Nuggets - Filter and Find](https://www.youtube.com/watch?v=KeYxsev737s&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=4)
+
+```js
+import React from 'react';
+import { data } from '../../../data';
+const UseStateArray = () => {
+  const [people, setPeople] = React.useState(data);
+
+  const removeItem = (id) => {
+    let newPeople = people.filter((person) => person.id !== id);
+    setPeople(newPeople);
+  };
+  return (
+    <div>
+      {people.map((person) => {
+        const { id, name } = person;
+        return (
+          <div key={id} className="item">
+            <h4>{name}</h4>
+            <button onClick={() => removeItem(id)}>remove</button>
+          </div>
+        );
+      })}
+      <button
+        className="btn"
+        style={{ marginTop: '2rem' }}
+        onClick={() => setPeople([])}
+      >
+        clear items
+      </button>
+    </div>
+  );
+};
+
+export default UseStateArray;
+```
+
+- should we update backroads app project?

@@ -1,17 +1,15 @@
-import { useState } from 'react';
-
 const ErrorExample = () => {
-  const [count, setCount] = useState(0);
+  let count = 0;
 
-  const handleCountClick = () => {
-    setCount(count + 1);
+  const handleClick = () => {
+    count = count + 1;
+    console.log(count);
   };
-
   return (
     <div>
-      <h2>you have clicked {`${count}`} times</h2>
-      <button type="button" onClick={handleCountClick} className="btn">
-        increase
+      <h2>{count}</h2>
+      <button type="button" className="btn" onClick={handleClick}>
+        increment
       </button>
     </div>
   );
