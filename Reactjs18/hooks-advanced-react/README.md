@@ -864,3 +864,31 @@ setUser(user);
 }
 
 ```
+
+#### Order Matters - Setup
+
+```js
+import Starter from './tutorial/03-conditional-rendering/starter/02-multiple-returns-fetch-data.jsx';
+```
+
+Please don't dismiss this topic. A lot of questions in course Q&A.
+
+Challenge :
+
+- destructure properties and remove user from JSX
+- you might or might not encounter the bug
+
+```js
+return (
+  <div>
+    <img
+      style={{ width: '100px', borderRadius: '25px' }}
+      src={avatar_url}
+      alt={name}
+    />
+    <h2>{name}</h2>
+    <h4>works at {company}</h4>
+    <p>{bio}</p>
+  </div>
+);
+```
