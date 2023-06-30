@@ -689,3 +689,54 @@ useEffect(() => {
   return () => window.removeEventListener('scroll', someFunc);
 }, []);
 ```
+
+#### Multiple Returns - Basics
+
+```js
+import Starter from './tutorial/03-conditional-rendering/starter/01-multiple-returns-basics.jsx';
+```
+
+Vanilla JS
+
+```js
+const sayHello = (name) => {
+  if (name) {
+    return `Hello, ${name}`;
+    // exit the function, skip rest of the code
+  }
+  // so if name provided, won't get to this line
+  return 'Hello, there';
+};
+
+const firstResp = sayHello('john');
+console.log(firstResp); // Hello, john
+const secondResp = sayHello();
+console.log(secondResp); // Hello, there
+```
+
+- if no explicit return by default function returns 'undefined'
+
+```js
+import { useEffect, useState } from 'react';
+
+const MultipleReturnsBasics = () => {
+  // while fetching data
+  // convention with boolean values "isSomething"
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      // done fetching data
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
+  // can return entire app
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  return <h2>My App</h2>;
+};
+export default MultipleReturnsBasics;
+```
