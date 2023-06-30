@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 const url = 'https://api.github.com/users/QuincyLarson';
 
 const MultipleReturnsFetchData = () => {
-  const [user, setUser] = useState(null);
+  // convention to setup booleans with isSomething
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -22,22 +23,25 @@ const MultipleReturnsFetchData = () => {
     };
     fetchUser();
   }, []);
-
-  if (isLoading) <h1>is loading...</h1>;
-
-  if (isError) <h1>there was an error occured</h1>;
-
+  // order matters
+  // don't place user JSX before loading or error
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+  if (isError) {
+    return <h2>There was an error...</h2>;
+  }
   return (
-    <section>
+    <div>
       <img
-        src={user.avatar_url}
-        alt={user.login}
         style={{ width: '150px', borderRadius: '25px' }}
+        src={user.avatar_url}
+        alt={user.name}
       />
-      <h2>{user.name} </h2>
-      <h4>{user.html_url} </h4>
-      <h4>works at : {user.company} </h4>
-    </section>
+      <h2>{user.name}</h2>
+      <h4>works at {user.company}</h4>
+      <p>{user.bio}</p>
+    </div>
   );
 };
 export default MultipleReturnsFetchData;
