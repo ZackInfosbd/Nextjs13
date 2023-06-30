@@ -490,3 +490,107 @@ const UseEffectBasics = () => {
 };
 export default UseEffectBasics;
 ```
+
+#### Multiple Effects
+
+```js
+import Starter from './tutorial/02-useEffect/starter/03-multiple-effects.jsx';
+```
+
+```js
+import { useState, useEffect } from 'react';
+
+const MultipleEffects = () => {
+  const [value, setValue] = useState(0);
+  const [secondValue, setSecondValue] = useState(0);
+
+  useEffect(() => {
+    console.log('hello from first useEffect');
+  }, [value]);
+
+  useEffect(() => {
+    console.log('hello from second useEffect');
+  }, [secondValue]);
+  return (
+    <div>
+      <h1>value : {value}</h1>
+      <button className="btn" onClick={() => setValue(value + 1)}>
+        value
+      </button>
+      <h1>second value : {secondValue}</h1>
+      <button className="btn" onClick={() => setSecondValue(secondValue + 1)}>
+        second value
+      </button>
+    </div>
+  );
+};
+export default MultipleEffects;
+```
+
+#### Fetch Data
+
+```js
+import Starter from './tutorial/02-useEffect/starter/04-fetch-data.jsx';
+```
+
+[Javascript Nuggets - Fetch API](https://www.youtube.com/watch?v=C_VIKzfpRrg&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=18&t=343s)
+
+- later in the course we will use axios
+
+Setup Challenge :
+
+- import useState and useEffect
+- setup state value
+  - users - default value []
+- setup useEffect
+- MAKE SURE IT RUNS ONLY ON INITIAL RENDER
+- in the cb, create a function which performs fetch functionality
+  - use url I provided in the starter file
+  - you can use .then or async
+  - set users equal to result
+  - iterate over the list and display image, user name and link
+- DON'T WORRY ABOUT CSS, MOST IMPORTANT LOGIC !!!
+
+```js
+import { useState, useEffect } from 'react';
+
+const url = 'https://api.github.com/users';
+
+const FetchData = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    // you can also setup function outside
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const users = await response.json();
+        setUsers(users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+  return (
+    <section>
+      <h3>github users</h3>
+      <ul className="users">
+        {users.map((user) => {
+          const { id, login, avatar_url, html_url } = user;
+          return (
+            <li key={id}>
+              <img src={avatar_url} alt={login} />
+              <div>
+                <h5>{login}</h5>
+                <a href={html_url}>profile</a>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+};
+export default FetchData;
+```
