@@ -304,3 +304,88 @@ const UseStateObject = () => {
 
 export default UseStateObject;
 ```
+
+#### Set Function "Gotcha"
+
+```js
+import Starter from './tutorial/01-useState/starter/05-useState-gotcha.jsx';
+```
+
+Setup Challenge :
+
+- setup a state value and the button
+- add functionality to increase value by 1
+- log a state value, right after setFunction
+
+Keep in mind that the state update function setState does not immediately mutate the state. Instead, it schedules an update to the state and tells React that it needs to re-render the component. The actual state update will be performed as part of the next rendering cycle. Be mindful when you need to set state value based on a different state value.
+
+trivial example
+
+```js
+import { useState } from 'react';
+
+const UseStateGotcha = () => {
+  const [value, setValue] = useState(0);
+
+  const handleClick = () => {
+    setValue(value + 1);
+    //  be careful it's the old value
+    console.log(value);
+    //  so if you have any functionality
+    // that relies on the latest value
+    // it will be wrong !!!
+  };
+  return (
+    <div>
+      <h1>{value}</h1>
+      <button className="btn" onClick={handleClick}>
+        increase
+      </button>
+    </div>
+  );
+};
+
+export default UseStateGotcha;
+```
+
+If you want to update the state immediately and synchronously, you can pass a function to setState that receives the previous state as an argument and returns the new state. For example:
+
+```js
+setState((prevState) => {
+  return { ...prevState, value: newValue };
+});
+```
+
+This can be useful if you need to update the state based on the previous state, or if you need to update the state synchronously.
+
+```js
+const handleClick = () => {
+  setValue((currentState) => {
+    // must return otherwise undefined
+    // below is the latest/current state value
+    const newState = currentState + 1;
+    return newState;
+  });
+};
+```
+
+- setTimeout Example
+
+```js
+const handleClick = () => {
+  // setTimeout(() => {
+  // console.log('clicked the button');
+  //   setValue(value + 1);
+  // }, 3000);
+  setTimeout(() => {
+    console.log('clicked the button');
+    setValue((currentState) => {
+      return currentState + 1;
+    });
+  }, 3000);
+};
+```
+
+- as an example refactor code in
+  /tutorial/01-useState/03-useState-array
+- should we use functional update approach for everything?
