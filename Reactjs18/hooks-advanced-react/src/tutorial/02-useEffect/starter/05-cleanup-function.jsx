@@ -17,13 +17,14 @@ const CleanupFunction = () => {
 
 const RandomComponent = () => {
   useEffect(() => {
-    // console.log('hmm, this is interesting');
-    const inter = setInterval(() => {
-      // console.log('hello from interval');
-    }, 1000);
+    const someFunc = () => {
+      console.log('hi, im scrolling');
+    };
+
+    window.addEventListener('scroll', someFunc);
+
     return () => {
-      clearInterval(inter);
-      console.log('clean up');
+      window.removeEventListener('scroll', someFunc);
     };
   }, []);
   return <h1>hello there</h1>;
