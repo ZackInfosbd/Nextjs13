@@ -10,13 +10,28 @@ const ShortCircuitExamples = () => {
 
   return (
     <div>
+      <h2>{text || 'Default value'} </h2>
       {text && (
         <div>
           <h1>whatever returns </h1>
           <h1>{name}</h1>
         </div>
       )}
+
       {user && <SomeComponent name={user.name} />}
+      <h2 style={{ margin: '1rem 0' }}>Ternary operator</h2>
+      <button type="button" className="btn">
+        {isEditing ? 'edit' : 'add'}{' '}
+      </button>
+      {user ? (
+        <div>
+          <h4>Hello there user: {user.name} </h4>
+        </div>
+      ) : (
+        <div>
+          <h2> please login </h2>
+        </div>
+      )}
     </div>
   );
 };
