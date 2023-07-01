@@ -1235,3 +1235,53 @@ If condition is truthy, the operator will return expression1. If condition is fa
 Jobster Example
 
 [Jobster ](https://redux-toolkit-jobster.netlify.app/landing)
+
+### Toggle Challenge
+
+```js
+import Starter from './tutorial/03-conditional-rendering/starter/06-toggle-challenge.jsx';
+```
+
+- create state value (boolean)
+- return a button and a component/element
+- when user clicks the button
+  - toggle state value
+  - conditionally render component/element
+
+Initial Setup
+
+```js
+import { useState } from 'react';
+
+const ToggleChallenge = () => {
+  const [showAlert, setShowAlert] = useState(false);
+
+  const toggleAlert = () => {
+    if (showAlert) {
+      setShowAlert(false);
+      return;
+    }
+    setShowAlert(true);
+  };
+
+  return (
+    <div>
+      <button className="btn" onClick={toggleAlert}>
+        toggle alert
+      </button>
+      {showAlert && <Alert />}
+    </div>
+  );
+};
+
+const Alert = () => {
+  return <div className="alert alert-danger">hello world</div>;
+};
+export default ToggleChallenge;
+```
+
+Improvements
+
+```js
+<button className='btn' onClick={() => setShowAlert(!showAlert)}>
+```
