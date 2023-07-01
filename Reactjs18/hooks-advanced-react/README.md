@@ -1083,3 +1083,44 @@ console.log(displayName()); // Output: "Anonymous"
 ```
 
 In this example, the displayName() function returns the name property of the user object if it exists, or "Anonymous" if the name property is not present. This is done using the || operator and short-circuit evaluation.
+
+### Short Circuit Evaluation React - Basics
+
+```js
+import Starter from './tutorial/03-conditional-rendering/starter/04-short-circuit-overview.jsx';
+```
+
+Setup Challenge :
+
+- create two state values
+- one "falsy" and second "truthy"
+- setup both conditions for each operator in JSX - hint {}
+  - || OR
+  - && AND
+
+```js
+import { useState } from 'react';
+
+const ShortCircuitOverview = () => {
+  // falsy
+  const [text, setText] = useState('');
+  // truthy
+  const [name, setName] = useState('susan');
+
+  const codeExample = text || 'hello world';
+
+  // can't use if statements
+  return (
+    <div>
+      {/* {if(someCondition){"won't work"}} */}
+
+      <h4>Falsy OR : {text || 'hello world'}</h4>
+      <h4>Falsy AND {text && 'hello world'}</h4>
+      <h4>Truthy OR {name || 'hello world'}</h4>
+      <h4>Truthy AND {name && 'hello world'}</h4>
+      {codeExample}
+    </div>
+  );
+};
+export default ShortCircuitOverview;
+```
