@@ -1124,3 +1124,96 @@ const ShortCircuitOverview = () => {
 };
 export default ShortCircuitOverview;
 ```
+
+#### Short Circuit Evaluation in React - Common Approaches
+
+```js
+import Starter from './tutorial/03-conditional-rendering/starter/05-short-circuit-examples.jsx';
+```
+
+Vanilla JS (Optional)
+The ! operator is a logical operator in JavaScript that negates a boolean value. It is equivalent to the not operator in other programming languages.
+
+For example:
+
+```js
+let isTrue = true;
+let isFalse = false;
+
+console.log(!isTrue); // outputs: false
+console.log(!isFalse); // outputs: true
+```
+
+You can use the ! operator to test if a value is not truthy or falsy:
+
+```js
+let val = 0;
+if (!val) {
+  console.log('val is falsy');
+}
+```
+
+You can also use the ! operator to convert a value to a boolean and negate it:
+
+```js
+let val = 'hello';
+let bool = !val; // bool is now false
+
+val = '';
+bool = !val; // bool is now true
+```
+
+```js
+import { useState } from 'react';
+
+const ShortCircuitOverview = () => {
+  // falsy
+  const [text, setText] = useState('');
+  // truthy
+  const [name, setName] = useState('susan');
+  const [user, setUser] = useState({ name: 'john' });
+  const [isEditing, setIsEditing] = useState(false);
+
+  // can't use if statements
+  return (
+    <div>
+      <h2>{text || 'default value'}</h2>
+      {text && (
+        <div>
+          <h2> whatever return</h2>
+          <h2>{name}</h2>
+        </div>
+      )}
+      {/* more info below */}
+      {!text && (
+        <div>
+          <h2> whatever return</h2>
+          <h2>{name}</h2>
+        </div>
+      )}
+      {user && <SomeComponent name={user.name} />}
+      <h2 style={{ margin: '1rem 0' }}>Ternary Operator</h2>
+      <button className="btn">{isEditing ? 'edit' : 'add'}</button>
+      {user ? (
+        <div>
+          <h4>hello there user {user.name}</h4>
+        </div>
+      ) : (
+        <div>
+          <h2>please login</h2>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const SomeComponent = ({ name }) => {
+  return (
+    <div>
+      <h4>hello there, {name}</h4>
+      <button className="btn">log out</button>
+    </div>
+  );
+};
+export default ShortCircuitEvaluation;
+```
