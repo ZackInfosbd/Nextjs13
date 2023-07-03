@@ -2054,3 +2054,121 @@ const UseRefBasics = () => {
 
 export default UseRefBasics;
 ```
+
+#### Custom Hooks
+
+```js
+import Starter from './tutorial/08-custom-hooks/starter/01-toggle.jsx';
+```
+
+- same rules as regular hooks
+- simplify component (less code)
+- re-use functionality
+
+useToggle.js
+
+```js
+import { useState } from 'react';
+
+const useToggle = (defaultValue) => {
+  const [show, setShow] = useState(defaultValue);
+  const toggle = () => {
+    setShow(!show);
+  };
+  return { show, toggle };
+};
+
+export default useToggle;
+```
+
+- Challenge
+
+- in App.jsx import 02-fetch-data
+- take a look at the component
+- and try to setup custom fetch hook
+- hint :
+  hook should return isLoading,isError,user
+  and take url as parameter
+
+useFetchPerson.js
+
+```js
+import { useState, useEffect } from 'react';
+
+const useFetchPerson = (url) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const resp = await fetch(url);
+        // console.log(resp);
+        if (!resp.ok) {
+          setIsError(true);
+          setIsLoading(false);
+          return;
+        }
+
+        const user = await resp.json();
+        setUser(user);
+      } catch (error) {
+        setIsError(true);
+        // console.log(error);
+      }
+      // hide loading
+      setIsLoading(false);
+    };
+    fetchUser();
+  }, []);
+
+  return { isLoading, isError, user };
+};
+
+export default useFetchPerson;
+```
+
+Generic Fetch
+
+useFetch.js
+
+```js
+import { useState, useEffect } from 'react';
+
+const useFetch = (url) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  // change state value
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // change name
+    const fetchData = async () => {
+      try {
+        const resp = await fetch(url);
+
+        if (!resp.ok) {
+          setIsError(true);
+          setIsLoading(false);
+          return;
+        }
+        // change to response
+        const response = await resp.json();
+        setData(response);
+      } catch (error) {
+        setIsError(true);
+        // console.log(error);
+      }
+      // hide loading
+      setIsLoading(false);
+    };
+    // invoke fetch data
+    fetchData();
+  }, []);
+
+  return { isLoading, isError, data };
+};
+
+export default useFetch;
+```
