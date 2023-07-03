@@ -2172,3 +2172,97 @@ const useFetch = (url) => {
 
 export default useFetch;
 ```
+
+#### Context API
+
+```js
+import Starter from './tutorial/09-context-api/starter';
+```
+
+Challenge
+
+- create three components and nest them in such way :
+
+- Navbar.jsx
+
+  - NavLinks.jsx (nested in Navbar)
+    - UserContainer.jsx (nested in NavLinks)
+
+- import Navbar.jsx in App.jsx (remove container - CSS)
+- in Navbar.jsx setup
+  - user state value
+    - default value {name:'something'}
+  - logout function
+    - set user back to null
+- pass both of them down to UserContainer.jsx
+- display user and button
+- on button click set user back to null
+
+- extra challenge
+- if user null, in UserContainer display <p>please login</p>
+
+Navbar.jsx
+
+```js
+import { useState } from 'react';
+import NavLinks from './NavLinks';
+
+const Navbar = () => {
+  const [user, setUser] = useState({ name: 'bob' });
+  const logout = () => {
+    setUser(null);
+  };
+  return (
+    <nav className="navbar">
+      <h5>CONTEXT API</h5>
+      <NavLinks user={user} logout={logout} />
+    </nav>
+  );
+};
+export default Navbar;
+```
+
+NavLinks.jsx
+
+```js
+import UserContainer from './UserContainer';
+
+const NavLinks = ({ user, logout }) => {
+  return (
+    <div className="nav-container">
+      <ul className="nav-links">
+        <li>
+          <a href="#">home</a>
+        </li>
+        <li>
+          <a href="#">about</a>
+        </li>
+      </ul>
+      <UserContainer user={user} logout={logout} />
+    </div>
+  );
+};
+export default NavLinks;
+```
+
+UserContainer.jsx
+
+```js
+const UserContainer = ({ user, logout }) => {
+  return (
+    <div className="user-container">
+      {user ? (
+        <>
+          <p>Hello There, {user.name.toUpperCase()}</p>
+          <button type="button" className="btn" onClick={logout}>
+            logout
+          </button>
+        </>
+      ) : (
+        <p>Please Login</p>
+      )}
+    </div>
+  );
+};
+export default UserContainer;
+```
