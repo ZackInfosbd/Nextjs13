@@ -2933,3 +2933,47 @@ const FetchData = () => {
   // rest of the logic
 };
 ```
+
+#### useMemo
+
+The useMemo hook is a hook in React that allows you to memoize a value. It takes two arguments: the first is a function that returns the value you want to memoize, and the second is an array of dependencies. The hook will return the memoized value that will only change if one of the values in the dependency array changes.
+
+By memoizing a value, you can avoid unnecessary calculations and improve the performance of your React application. The value will only be recalculated if one of its dependencies changes, otherwise the same instance of the value will be returned. This can be useful in situations where you have an expensive calculation that you only want to recompute when its dependencies change.
+
+Here is an example of how you might use useMemo:
+
+```js
+import React, { useMemo } from 'react';
+
+function MyComponent({ data }) {
+  const processedData = useMemo(() => {
+    return data.map((item) => item.toUpperCase());
+  }, [data]);
+
+  return (
+    <div>
+      {processedData.map((item) => (
+        <div key={item}>{item}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+In this example, the processedData value is memoized using useMemo and the data prop is passed as a dependency. This means that the processedData value will only be recalculated if the data prop changes.
+
+- create slowFunction file
+- setup a function
+- import in index.js and set it equal to a value
+
+```js
+const slowFunction = () => {
+  let value = 0;
+  for (let i = 0; i <= 1000000000; i++) {
+    value += i;
+  }
+  return value;
+};
+
+export default slowFunction;
+```
