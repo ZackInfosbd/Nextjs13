@@ -2764,3 +2764,36 @@ export default ReducerBasics;
   - import actions
   - import data
   - export/import reducer
+
+#### Performance
+
+#### Lower State / Push The State Down
+
+```js
+import Starter from './tutorial/11-performance/starter/01-lower-state';
+```
+
+When Component Re-Renders :
+
+- When the component's state or props change, React will re-render the component to reflect these changes.
+
+- When the parent element re-renders, even if the component's state or props have not changed.
+
+- lower state
+
+```js
+import { useState } from 'react';
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <button
+      className="btn"
+      onClick={() => setCount(count + 1)}
+      style={{ marginBottom: '1rem' }}
+    >
+      count {count}
+    </button>
+  );
+};
+export default Counter;
+```
