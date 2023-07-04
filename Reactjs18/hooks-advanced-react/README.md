@@ -2977,3 +2977,155 @@ const slowFunction = () => {
 
 export default slowFunction;
 ```
+
+#### useTransition
+
+[JS Nuggets - Array.from](https://www.youtube.com/watch?v=zg1Bv4xubwo&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ&index=11&t=666s)
+
+```js
+import Starter from './tutorial/11-performance/starter/04-react-18';
+```
+
+- useTransition is a React Hook that lets you update the state without blocking the UI.
+
+```js
+import { useState, useTransition } from 'react';
+const LatestReact = () => {
+  const [text, setText] = useState('');
+  const [items, setItems] = useState([]);
+  const [isPending, startTransition] = useTransition();
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+
+    startTransition(() => {
+      const newItems = Array.from({ length: 5000 }, (_, index) => {
+        return (
+          <div key={index}>
+            <img src="/vite.svg" alt="" />
+          </div>
+        );
+      });
+      setItems(newItems);
+    });
+  };
+  return (
+    <section>
+      <form className="form">
+        <input
+          type="text"
+          className="form-input"
+          value={text}
+          onChange={handleChange}
+        />
+      </form>
+      <h4>Items Below</h4>
+      {isPending ? (
+        'Loading...'
+      ) : (
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            marginTop: '2rem',
+          }}
+        >
+          {items}
+        </div>
+      )}
+    </section>
+  );
+};
+export default LatestReact;
+```
+
+#### Suspense API
+
+The Suspense API is a feature in React that allows you to manage the loading state of your components. It provides a way to "suspend" rendering of a component until some data has been fetched, and display a fallback UI in the meantime. This makes it easier to handle asynchronous data loading and provide a smooth user experience in your React application.
+
+Here is an example of how you might use the Suspense API:
+
+```js
+import React, { lazy, Suspense } from 'react';
+
+const DataComponent = lazy(() => import('./DataComponent'));
+
+function MyComponent() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DataComponent />
+    </Suspense>
+  );
+}
+```
+
+```js
+import { useState, useTransition, lazy, Suspense } from 'react';
+const SlowComponent = lazy(() => import('./SlowComponent'));
+const LatestReact = () => {
+  const [text, setText] = useState('');
+  const [items, setItems] = useState([]);
+  const [isPending, startTransition] = useTransition();
+  const [show, setShow] = useState(false);
+  const handleChange = (e) => {
+    setText(e.target.value);
+
+    startTransition(() => {
+      const newItems = Array.from({ length: 5000 }, (_, index) => {
+        return (
+          <div key={index}>
+            <img src="/vite.svg" alt="" />
+          </div>
+        );
+      });
+      setItems(newItems);
+    });
+  };
+  return (
+    <section>
+      <form className="form">
+        <input
+          type="text"
+          className="form-input"
+          value={text}
+          onChange={handleChange}
+        />
+      </form>
+      <h4>Items Below</h4>
+      {isPending ? (
+        'Loading...'
+      ) : (
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            marginTop: '2rem',
+          }}
+        >
+          {items}
+        </div>
+      )}
+      <button onClick={() => setShow(!show)} className="btn">
+        toggle
+      </button>
+      {show && (
+        <Suspense fallback={<h4>Loading...</h4>}>
+          <SlowComponent />
+        </Suspense>
+      )}
+    </section>
+  );
+};
+export default LatestReact;
+```
+
+- typical setup (wrap entire return in Suspense)
+
+```js
+return (
+  <Suspense fallback={<h4>Loading...</h4>}>
+    {/* rest of the logic */}
+    <section>{show && <SlowComponent />}</section>
+  </Suspense>
+);
+```
