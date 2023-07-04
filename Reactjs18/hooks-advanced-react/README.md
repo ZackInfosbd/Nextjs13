@@ -2291,3 +2291,86 @@ npm install && npm run dev
 - setup a custom hook
 - access in App.jsx
 - log result
+
+#### useReducer
+
+```js
+import Starter from './tutorial/10-useReducer/starter/01-useReducer.jsx';
+```
+
+- it's the complete file from 03-useState-array
+
+Challenge
+
+- let's add reset functionality
+- create function that set's people back to data array
+- create another button, similar to clear just for reset
+- use conditional rendering to toggle between the buttons,
+  depending on people value
+
+```js
+const resetList = () => {
+  setPeople(data);
+};
+
+// JSX
+{
+  people.length < 1 ? (
+    <button className="btn" style={{ marginTop: '2rem' }} onClick={resetList}>
+      reset
+    </button>
+  ) : (
+    <button className="btn" style={{ marginTop: '2rem' }} onClick={clearList}>
+      clear
+    </button>
+  );
+}
+```
+
+```js
+import React from 'react';
+import { data } from '../../../data';
+const ReducerBasics = () => {
+  const [people, setPeople] = React.useState(data);
+
+  const removeItem = (id) => {
+    let newPeople = people.filter((person) => person.id !== id);
+    setPeople(newPeople);
+  };
+  const resetList = () => {
+    setPeople(data);
+  };
+  return (
+    <div>
+      {people.map((person) => {
+        const { id, name } = person;
+        return (
+          <div key={id} className="item">
+            <h4>{name}</h4>
+            <button onClick={() => removeItem(id)}>remove</button>
+          </div>
+        );
+      })}
+      {people.length < 1 ? (
+        <button
+          className="btn"
+          style={{ marginTop: '2rem' }}
+          onClick={resetList}
+        >
+          reset
+        </button>
+      ) : (
+        <button
+          className="btn"
+          style={{ marginTop: '2rem' }}
+          onClick={clearList}
+        >
+          clear
+        </button>
+      )}
+    </div>
+  );
+};
+
+export default ReducerBasics;
+```
