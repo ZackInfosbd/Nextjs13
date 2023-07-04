@@ -2904,3 +2904,32 @@ function MyComponent() {
 ```
 
 In this example, the handleClick function is memoized using useCallback and the data prop is passed as a dependency. This means that the handleClick function will only be re-created if the data prop changes.
+
+#### useCallback - Common Use Case
+
+```js
+import Final from './tutorial/02-useEffect/final/04-fetch-data';
+```
+
+```js
+import { useState, useEffect, useCallback } from 'react';
+const url = 'https://api.github.com/users';
+
+const FetchData = () => {
+  const [users, setUsers] = useState([]);
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch(url);
+      const users = await response.json();
+      setUsers(users);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+  // rest of the logic
+};
+```
