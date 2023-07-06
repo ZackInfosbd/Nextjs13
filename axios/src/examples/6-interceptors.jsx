@@ -27,7 +27,7 @@ fetchData.interceptors.response.use(
   },
 
   (error) => {
-    if (error.response.status === 404) {
+    if (error.response.statu === 404) {
       console.log('NOT FOUND');
     }
     return Promise.reject(error);
