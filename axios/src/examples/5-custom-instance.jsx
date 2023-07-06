@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { fetchData } from '../axios/custom';
 import axios from 'axios';
+
+import fetchData from '../axios/interceptors';
 
 const randomUserUrl = 'https://randomuser.me/api';
 

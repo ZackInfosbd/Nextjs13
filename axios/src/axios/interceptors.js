@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import axios from 'axios';
 
 const fetchData = axios.create({
@@ -27,29 +25,11 @@ fetchData.interceptors.response.use(
   },
 
   (error) => {
-    if (error.response.status === 404) {
+    if (error.response === 404) {
       console.log('NOT FOUND');
     }
     return Promise.reject(error);
   }
 );
 
-// const url = 'https://course-api.com/react-store-products';
-
-const Interceptors = () => {
-  const fetchData = async () => {
-    try {
-      const resp = await fetchData('/react-store-products');
-      console.log(resp);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  return <h2 className="text-center">interceptors</h2>;
-};
-export default Interceptors;
+export default fetchData;
