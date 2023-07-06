@@ -1,12 +1,12 @@
 import Navbar from './components/Navbar';
+import CartContainer from './components/CartContainer';
 
 function App() {
   return (
-    <>
-      <header>
-        <Navbar />
-      </header>
-    </>
+    <main>
+      <Navbar />
+      <CartContainer />
+    </main>
   );
 }
 
