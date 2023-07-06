@@ -1,4 +1,4 @@
-import Starter from './examples/3-post-request';
+import Starter from './examples/5-custom-instance';
 
 function App() {
   return (
