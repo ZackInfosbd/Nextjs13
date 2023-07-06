@@ -1,4 +1,4 @@
-import Starter from './examples/5-custom-instance';
+import Starter from './examples/6-interceptors';
 
 function App() {
   return (
