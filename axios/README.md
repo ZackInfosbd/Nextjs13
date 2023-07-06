@@ -99,6 +99,25 @@ axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded';
 ```
 
+##### Update
+
+In the latest version there is no common property
+
+```js
+// In latest axios version common property returns "undefined"
+// axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers['Accept'] = 'application/json';
+
+// In latest axios version common property returns "undefined"
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+axios.defaults.headers['Authorization'] = AUTH_TOKEN;
+```
+
+```js
+// request.headers.common['Accept'] = `application/json`;
+request.headers['Accept'] = `application/json`;
+```
+
 #### Custom Instance
 
 ```js
@@ -143,23 +162,4 @@ authFetch.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-```
-
-##### Update
-
-In the latest version there is no common property
-
-```js
-// In latest axios version common property returns "undefined"
-// axios.defaults.headers.common['Accept'] = 'application/json';
-axios.defaults.headers['Accept'] = 'application/json';
-
-// In latest axios version common property returns "undefined"
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-axios.defaults.headers['Authorization'] = AUTH_TOKEN;
-```
-
-```js
-// request.headers.common['Accept'] = `application/json`;
-request.headers['Accept'] = `application/json`;
 ```
