@@ -9,14 +9,14 @@ type Props = {
   };
 };
 
-// export function generateStaticParams() {
-//   const posts = getSortedPostsData();
-//   return posts.map((post) => {
-//     return {
-//       postId: post.id,
-//     };
-//   });
-// }s
+export function generateStaticParams() {
+  const posts = getSortedPostsData();
+  return posts.map((post) => {
+    return {
+      postId: post.id,
+    };
+  });
+}
 
 export function generateMetadata({ params }: Props) {
   const posts = getSortedPostsData(); // deduped!!!
